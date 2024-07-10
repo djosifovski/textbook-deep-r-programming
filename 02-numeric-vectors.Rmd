@@ -1,0 +1,134 @@
+---
+title: "2_Numeric vectors"
+output: html_document
+date: "2024-07-09"
+---
+
+## 2.1. Creating numeric vectors
+
+### 2.1.1. Numeric constants
+
+```{r}
+-3.14
+123e-4 # scientific notation
+NA_real_  # numeric NA (special indicator for missing value)
+```
+### 2.1.2. Concatenating vectors with `c`
+
+```{r}
+c(1, 2, 3)  # three vectors of length one –> one vector of length three
+c(1, c(2, NA_real_, 4), 5, c(6, c(7, Inf)))
+```
+### 2.1.3. Repeating entries with `rep`
+
+Replicate elements in vector.
+
+```{r}
+rep(x=1, times=5)
+rep(c(1, 2, 3), 4)
+# each element is repeated the corresponding number of times
+rep(c(1, 2, 3), c(2, 1, 3)) # both vectors must be of same length
+rep(c(1, 2, 3), c(4, 4, 4))
+rep(c(1, 2, 3), each=3)
+rep(c(1, 2, 3), length.out=7)
+rep(c(1, 2, 3), 0) # zero-length vectors are possible too
+```
+### 2.1.4. Generating arithmetic progressions with `seq` and `:`
+
+We can call the `seq` function to create a sequence of equally-spaced numbers on a linear scale, i.e., an arithmetic progression.
+
+```{r}
+seq(from=1, to=15, by=2)
+seq(1, 5, length.out=7)
+```
+Arithmetic progressions with steps equal to 1 or -1 can also be generated via the `:` operator.
+
+```{r}
+1:10    # seq(1, 10) or seq(1, 10, 1)
+-1:10   # seq(-1, 10) or seq(-1, 10, 1)
+-1:-10  # seq(-1, -10) or seq(-1, -10, -1)
+```
+## Exercise 2.1
+
+```{r}
+seq(1, 10, 2)
+seq_along(along.with=c(2,3,7)) # is equivalent to
+seq(1, 3, 1)
+1:3
+seq_len(length.out=4) # is equivalent to
+seq(1, 4, 1)
+1:4
+```
+We can get by without the `seq_along` and `seq_len` functions, but they are very fast primitives for specific cases.
+
+### 2.1.5. Generating pseudorandom numbers
+
+Generate pseudorandom numbers:
+```{r}
+runif(7) # uniform U(0, 1)
+rnorm(7) # normal N(0, 1)
+```
+
+Sampling:
+
+```{r}
+sample(1:10, 20, replace=TRUE)  # 20 with replacement (allow repetitions)
+sample(1:10, 5, replace=FALSE)  # 5 without replacement (do not repeat)
+```
+The distribution of the sampled values does not need to be uniform:
+
+```{r}
+sample(x=0:1, 20, replace=TRUE, prob=c(0.9, 0.1)) # the length of x and prob must be the same
+```
+By setting the seed of the random number generator, i.e., resetting its state to a given one, we can obtain results that are _reproducible_.
+
+```{r}
+set.seed(12345) # seeds are specified with integers
+sample(1:10, 5, replace=TRUE)
+sample(1:10, 5, replace=TRUE)
+sample(1:10, 5, replace=TRUE) 
+```
+
+Setting the seed to the one used previously gives:
+
+```{r}
+set.seed(12345)
+sample(1:10, 5, replace=TRUE)
+```
+```{r}
+set.seed(12345)
+sample(1:10, 10, replace=TRUE)
+```
+### 2.1.6. Reading data with `scan`
+
+We can invoke the scan function to read all the inputs and convert them to a single numeric vector:
+
+```{r}
+scan(paste0("https://github.com/gagolews/teaching-data/raw/",
+    "master/marek/euraud-20200101-20200630.csv"), comment.char="#")
+```
+
+We used the paste0 function to concatenate two long strings (too long to fit a single line of code) and form a single URL.
+
+## Exercise 2.2
+
+```{r}
+help("scan")
+```
+
+## Example 2.3
+
+```{r}
+plot(scan(paste0("https://github.com/gagolews/teaching-data/raw/",
+    "master/marek/euraud-20200101-20200630.csv"), comment.char="#"),
+    main="Exchange rates", xlab="Day", ylab="EUR/AUD")
+```
+
+
+
+
+
+
+
+
+

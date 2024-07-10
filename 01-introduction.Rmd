@@ -1,0 +1,42 @@
+---
+title: "1_Introduction"
+output: html_document
+date: "2024-07-09"
+---
+
+## 1.1. Hello, world!
+
+Print out a given character string with the `cat` function:
+
+```{r}
+cat("My hovercraft is full of eels.\n") # \n == newline
+```
+### Exercise 1.1
+```{r}
+cat("This is the first exercise of the textbook.\n")
+cat("Today I ate homemade pannacotta.")
+```
+## 1.3. Atomic vectors at a glance
+
+In R, no separate types representing individual values have been defined. Instead, what seems to be a single datum, is already a vector (sequence, array) of length one.
+
+```{r}
+2.71828          # input a number; here: the same as print(2.71828)
+length(2.71828)  # it is a vector with one element
+```
+To create a vector of any length, we can call the `c` function, which combines given arguments into a single sequence:
+
+```{r}
+c(1, 2, 3) # three values combined
+length(c(1, 2, 3)) # # indeed, it is a vector of length three
+```
+## Exercise 1.6
+The three most important atomic types are numeric, logical and character.
+
+## Exercise 1.7
+Each scalar value in R is actually a one-element vector. Atomic vectors are thus considered basic data types in R.
+
+
+
+
+
